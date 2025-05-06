@@ -1,1 +1,43 @@
-<p>product-list works!</p>
+<h1 class="p-3">Prodotti</h1>
+<div class="container mt-4">
+  <div class="row row-cols-1 row-cols-md-3 g-4">
+    <div class="col" *ngFor="let product of products; let i = index"> <!-- Ciclo su ogni prodotto della lista -->
+      <div class="card h-100 text-center">
+        <div class="card-body">
+          <h5 class="card-title">{{ product.name }}</h5>
+          <p class="card-text">
+            Prezzo: <strong>{{ product.price }}€</strong>
+          </p>
+          <div class="d-flex justify-content-center gap-2">
+            <!-- Seleziona il prodotto per visualizzare i dettagli -->
+            <button class="btn btn-primary btn-sm" (click)="selectProduct(product)">Dettagli</button> 
+            <!-- Elimina il prodotto dall'elenco -->
+            <button class="btn btn-danger btn-sm" (click)="deleteProduct(i)">Elimina</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-4" *ngIf="selectedProduct"> <!-- Mostra il componente dei dettagli solo se un prodotto è selezionato -->
+    <app-product-detail [product]="selectedProduct"></app-product-detail> <!-- Passa il prodotto selezionato al componente product detail -->
+  </div>
+
+  <div class="mt-5">
+    <h4>Aggiungi un nuovo prodotto</h4>
+    <form (ngSubmit)="onSubmit()" class="row g-3"> <!-- Gestisce l'invio del form -->
+      <div class="col-md-4"> <!-- Campo per il nome del nuovo prodotto -->
+        <input [(ngModel)]="newProduct.name" name="name" placeholder="Nome del prodotto" class="form-control" required/>
+      </div>
+      <div class="col-md-3"> <!-- Campo per il prezzo del nuovo prodotto -->
+        <input [(ngModel)]="newProduct.price" name="price" type="number" class="form-control" placeholder="Prezzo" required/>
+      </div>
+      <div class="col-md-5"> <!-- Campo per la descrizione del nuovo prodotto -->
+        <input [(ngModel)]="newProduct.description" name="description" placeholder="Descrizione" class="form-control"/>
+      </div>
+      <div class="col-12">
+        <button type="submit" class="btn btn-success">Aggiungi Prodotto</button>
+      </div>
+    </form>
+  </div>
+</div>

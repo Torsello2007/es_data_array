@@ -1,1 +1,19 @@
-<p>product-detail works!</p>
+<div class="card mt-4 border-1 rounded">
+    <ng-container *ngIf="product; else noProductSelected"> <!-- Verifica se esiste un prodotto selezionato -->
+      <div class="card-header bg-primary text-white">
+        <h2 class="card-title m-0">{{ product.name }}</h2>
+      </div>
+      <div class="card-body">
+        <h5 class="card-subtitle mb-3">Dettaglio Prodotto</h5>
+        <p><strong>Nome:</strong> {{ product.name }}</p>
+        <p><strong>Prezzo:</strong> {{ product.price }}€</p>
+        <p><strong>Descrizione:</strong> {{ product.description }}</p>
+      </div>
+    </ng-container>
+    
+    <ng-template #noProductSelected> <!-- Contenuto mostrato se nessun prodotto è selezionato -->
+      <div class="card-body text-center text-muted">
+        <p>Seleziona un prodotto per vedere i dettagli.</p>
+      </div>
+    </ng-template>
+  </div>
